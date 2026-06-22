@@ -116,9 +116,31 @@ async function renderPostDetail(slug) {
     const parsedHtml = marked.parse(markdown);
     contentArea.innerHTML = parsedHtml;
     
-    // highlight.js 코드 구문 강조 트리거
+    // 1) Mermaid 다이어그램 노드 치환 및 렌더링
+    const mermaidBlocks = contentArea.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0 && typeof mermaid !== 'undefined') {
+      mermaid.initialize({ 
+        theme: 'dark', 
+        startOnLoad: false,
+        securityLevel: 'loose'
+      });
+      
+      mermaidBlocks.forEach((block) => {
+        const pre = block.parentElement;
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = block.textContent;
+        pre.replaceWith(mermaidDiv);
+      });
+      
+      mermaid.init(undefined, '.mermaid');
+    }
+    
+    // 2) highlight.js 코드 구문 강조 트리거 (Mermaid 제외)
     contentArea.querySelectorAll('pre code').forEach((block) => {
-      hljs.highlightElement(block);
+      if (!block.classList.contains('language-mermaid')) {
+        hljs.highlightElement(block);
+      }
     });
     
   } catch (error) {
