@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "why-govail",
+    "title": "왜 GoVail을 만들게 되었는가? (Why GoVail)",
+    "description": "AI 코딩 툴과 LLM 에이전트의 보안 및 프롬프트 기밀 정보 노출 문제를 해결하고자 한 오픈소스 실험의 시작 동기를 소개합니다.",
+    "date": "2026-06-22",
+    "category": "Essay"
+  },
+  {
+    "slug": "architecture",
+    "title": "GoVail 아키텍처 및 데이터 흐름 (Architecture)",
+    "description": "실시간 트래픽을 지연 없이 가로채서 통제하기 위한 Gateway-First 구조와 컴포넌트 간 데이터 흐름을 다룹니다.",
+    "date": "2026-06-22",
+    "category": "Architecture"
+  },
+  {
+    "slug": "gateway-vs-runtime",
+    "title": "Gateway vs Runtime: 단순함과 복잡함의 경계 나누기",
+    "description": "10ms 미만 처리를 목표로 하는 동기식 게이트웨이와 승인 이벤트를 대기하는 비동기식 런타임을 어떻게 나누었는지 아키텍처 의사결정을 적어봅니다.",
+    "date": "2026-06-22",
+    "category": "Design"
+  },
+  {
+    "slug": "scanner-to-policy",
+    "title": "레거시 소스 코드가 어떻게 AI 통제 정책이 되는가?",
+    "description": "스캐너가 레거시 애플리케이션 코드를 훑어서 AI 도구용 힌트를 도출해 내는 정적 구조 정보의 정책 연동 방식을 설명합니다.",
+    "date": "2026-06-22",
+    "category": "Security"
+  },
+  {
+    "slug": "audit-event-design",
+    "title": "기록이 남아야 통제할 수 있다: 감사 로그(Audit Event) 설계",
+    "description": "제로 트러스트의 첫걸음인 통신 모니터링을 위해 JSON Schema 기반 공통 규격으로 감사 로그를 정형화하고 모니터링에 연동한 설계를 설명합니다.",
+    "date": "2026-06-22",
+    "category": "Design"
+  }
+]
