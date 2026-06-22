@@ -131,6 +131,9 @@ async function renderPostDetail(slug) {
         const pre = block.parentElement;
         const mermaidDiv = document.createElement('div');
         mermaidDiv.className = 'mermaid';
+        // 브라우저가 개행 문자를 공백으로 합쳐버려 문법 에러가 나는 것을 막기 위해 pre 스타일 강제
+        mermaidDiv.style.whiteSpace = 'pre';
+        mermaidDiv.style.display = 'block';
         // 양끝 불필요한 공백을 잘라내어 문법 에러 예방
         mermaidDiv.textContent = block.textContent.trim();
         pre.replaceWith(mermaidDiv);

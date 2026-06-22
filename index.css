@@ -500,3 +500,23 @@ body {
     font-size: 1.8rem;
   }
 }
+
+/* Mermaid 다이어그램 스타일 커스텀 */
+.mermaid {
+  background-color: transparent !important;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  padding: 1.5rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
