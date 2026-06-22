@@ -129,11 +129,13 @@ async function renderPostDetail(slug) {
         const pre = block.parentElement;
         const mermaidDiv = document.createElement('div');
         mermaidDiv.className = 'mermaid';
+        // HTML Entity 파싱 문제를 막기 위해 textContent 사용
         mermaidDiv.textContent = block.textContent;
         pre.replaceWith(mermaidDiv);
       });
       
-      mermaid.init(undefined, '.mermaid');
+      // DOM 엘리먼트들을 직접 전달하여 렌더링 수행
+      mermaid.init(undefined, contentArea.querySelectorAll('.mermaid'));
     }
     
     // 2) highlight.js 코드 구문 강조 트리거 (Mermaid 제외)
