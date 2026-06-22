@@ -1,3 +1,8 @@
+---
+title: Gateway vs Runtime
+description: 10ms 미만 처리를 목표로 하는 동기식 게이트웨이와 승인 이벤트를 대기하는 비동기식 런타임을 어떻게 나누었는지 아키텍처 의사결정을 적어봅니다.
+---
+
 # Gateway vs Runtime: 단순함과 복잡함의 경계 나누기
 
 GoVail 프로젝트를 고민하면서 가장 크게 갈등했던 지점은 **"승인 기능(Approval Flow)을 어디에 넣을 것인가?"**였습니다.

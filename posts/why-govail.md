@@ -1,3 +1,8 @@
+---
+title: 왜 GoVail을 만들게 되었는가?
+description: AI 코딩 툴과 LLM 에이전트의 보안 및 프롬프트 기밀 정보 노출 문제를 해결하고자 한 오픈소스 실험의 시작 동기를 소개합니다.
+---
+
 # 왜 GoVail을 만들게 되었는가? (Why GoVail?)
 
 어느덧 AI 코딩 도구는 개발 일상의 필수품이 되었습니다. Cursor, Claude Code, GitHub Copilot 같은 도구들은 코딩 생산성을 극적으로 끌어올려 줍니다. 

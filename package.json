@@ -1,0 +1,22 @@
+{
+  "name": "govail-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "GoVail AI Governance Gateway Technical Blog",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [
+    "govail",
+    "security",
+    "blog",
+    "vitepress"
+  ],
+  "author": "GoVail Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "vitepress": "^1.1.4"
+  }
+}
