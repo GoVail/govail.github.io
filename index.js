@@ -43,8 +43,9 @@ function handleRoute() {
   } else if (hash.startsWith('#/post/')) {
     // 2) 개별 글 상세 보기
     const slug = hash.replace('#/post/', '');
-    renderPostDetail(slug);
+    // 크기 계산 오류를 막기 위해 postView의 display:block (active class) 상태를 먼저 적용합니다.
     postView.classList.add('active');
+    renderPostDetail(slug);
   } else {
     // 3) 잘못된 경로는 홈으로 리디렉트
     window.location.hash = '#/';
@@ -125,17 +126,19 @@ async function renderPostDetail(slug) {
         securityLevel: 'loose'
       });
       
+      const targetDivs = [];
       mermaidBlocks.forEach((block) => {
         const pre = block.parentElement;
         const mermaidDiv = document.createElement('div');
         mermaidDiv.className = 'mermaid';
-        // HTML Entity 파싱 문제를 막기 위해 textContent 사용
-        mermaidDiv.textContent = block.textContent;
+        // 양끝 불필요한 공백을 잘라내어 문법 에러 예방
+        mermaidDiv.textContent = block.textContent.trim();
         pre.replaceWith(mermaidDiv);
+        targetDivs.push(mermaidDiv);
       });
       
-      // DOM 엘리먼트들을 직접 전달하여 렌더링 수행
-      mermaid.init(undefined, contentArea.querySelectorAll('.mermaid'));
+      // 교체 완료된 DOM 노드 참조 리스트를 직접 전달
+      mermaid.init(undefined, targetDivs);
     }
     
     // 2) highlight.js 코드 구문 강조 트리거 (Mermaid 제외)
