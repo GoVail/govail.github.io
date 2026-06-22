@@ -21,12 +21,12 @@ export default defineConfig({
     ['script', {}, `
       function renderMermaid() {
         if (typeof mermaid !== 'undefined') {
-          const blocks = document.querySelectorAll('pre code.language-mermaid');
+          const blocks = document.querySelectorAll('div.language-mermaid pre code');
           if (blocks.length > 0) {
             mermaid.initialize({ theme: 'dark', startOnLoad: false });
             const targetDivs = [];
             blocks.forEach((block) => {
-              const pre = block.parentElement;
+              const container = block.closest('div.language-mermaid') || block.parentElement;
               const mermaidDiv = document.createElement('div');
               mermaidDiv.className = 'mermaid';
               mermaidDiv.style.whiteSpace = 'pre';
@@ -38,7 +38,7 @@ export default defineConfig({
               mermaidDiv.style.padding = '1rem';
               mermaidDiv.style.margin = '1rem 0';
               mermaidDiv.textContent = block.textContent.trim();
-              pre.replaceWith(mermaidDiv);
+              container.replaceWith(mermaidDiv);
               targetDivs.push(mermaidDiv);
             });
             mermaid.init(undefined, targetDivs);
