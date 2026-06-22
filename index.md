@@ -34,12 +34,12 @@ features:
 
 ::: info 1. 왜 GoVail을 시작했는가?
 * **아티클 링크**: [왜 GoVail을 만들게 되었는가?](/posts/why-govail)
-* **내용 요약**: Claude Code, Cursor 등 AI 코딩 비서들이 무단으로 프로젝트 기밀 소스 및 API Key를 모델 공급사로 전송하는 것의 불안함과 이를 통제하기 위해 로컬 정책 필터 레이어를 구상하게 된 동기.
+* **내용 요약**: Claude Code, Cursor 등 AI 코딩 비서를 사용할 때 프로젝트 소스, API Key, 내부 정책 문서가 외부 모델 공급사로 전달될 수 있다는 불안감과 이를 통제하기 위해 로컬 정책 필터 레이어를 구상하게 된 동기.
 :::
 
 ::: info 2. 실시간 차단 아키텍처
 * **아티클 링크**: [GoVail 아키텍처 및 데이터 흐름](/posts/architecture)
-* **내용 요약**: 지연 시간(Latency)을 10ms 미만으로 극단적으로 억제하기 위해 Gateway-First 구조를 선택한 배경과, 실시간 트래픽 필터링의 sequence diagram 분석.
+* **내용 요약**: 사용자 체감 지연을 최소화하기 위해 Gateway-First 구조를 선택한 배경과, 실시간 트래픽 필터링의 sequence diagram 분석.
 :::
 
 ::: info 3. 단순함과 복잡함의 경계
