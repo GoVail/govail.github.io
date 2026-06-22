@@ -119,8 +119,10 @@ async function renderPostDetail(slug) {
     
     // 1) Mermaid 다이어그램 노드 치환 및 렌더링
     const mermaidBlocks = contentArea.querySelectorAll('pre code.language-mermaid');
-    if (mermaidBlocks.length > 0 && typeof mermaid !== 'undefined') {
-      mermaid.initialize({ 
+    const activeMermaid = window.mermaid;
+    
+    if (mermaidBlocks.length > 0 && activeMermaid) {
+      activeMermaid.initialize({ 
         theme: 'dark', 
         startOnLoad: false,
         securityLevel: 'loose'
@@ -140,8 +142,10 @@ async function renderPostDetail(slug) {
         targetDivs.push(mermaidDiv);
       });
       
-      // 교체 완료된 DOM 노드 참조 리스트를 직접 전달
-      mermaid.init(undefined, targetDivs);
+      // Mermaid v10 API 표준에 따라 run() 메서드를 통해 렌더링을 지시합니다.
+      activeMermaid.run({
+        nodes: targetDivs
+      });
     }
     
     // 2) highlight.js 코드 구문 강조 트리거 (Mermaid 제외)

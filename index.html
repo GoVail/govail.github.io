@@ -101,8 +101,16 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <!-- Highlight.js (Code Highlighter) CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-  <!-- Mermaid (Diagram Render) CDN - Use v9 for global variable compatibility -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+  <!-- Mermaid ESM Import to guarantee global window.mermaid availability -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+    mermaid.initialize({
+      theme: 'dark',
+      startOnLoad: false,
+      securityLevel: 'loose'
+    });
+  </script>
   <!-- Custom JS -->
   <script src="index.js"></script>
 </body>
