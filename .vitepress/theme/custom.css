@@ -1,0 +1,389 @@
+/**
+ * GoVail DevLog — 디자인 시스템
+ *
+ * 강조색: Steel Blue hsl(215, 60%, 48%)
+ * 기본 모드: 라이트
+ * 폰트: Inter (Google Fonts)
+ * 원칙: 보더 기반 구분, 그림자 최소화, 과장 없음
+ */
+
+/* ─────────────────────────────────────────────
+   폰트
+───────────────────────────────────────────── */
+:root {
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+    'Menlo', 'Monaco', monospace;
+}
+
+/* ─────────────────────────────────────────────
+   강조색: Steel Blue (라이트 / 다크 공통 시맨틱)
+───────────────────────────────────────────── */
+:root {
+  --vp-c-brand-1: hsl(215, 60%, 44%);
+  --vp-c-brand-2: hsl(215, 60%, 38%);
+  --vp-c-brand-3: hsl(215, 60%, 32%);
+  --vp-c-brand-soft: hsl(215, 60%, 44% / 0.12);
+}
+
+.dark {
+  --vp-c-brand-1: hsl(215, 65%, 62%);
+  --vp-c-brand-2: hsl(215, 65%, 55%);
+  --vp-c-brand-3: hsl(215, 65%, 48%);
+  --vp-c-brand-soft: hsl(215, 65%, 62% / 0.14);
+}
+
+/* ─────────────────────────────────────────────
+   라이트 모드 배경 / 텍스트
+───────────────────────────────────────────── */
+:root {
+  --vp-c-bg:          #ffffff;
+  --vp-c-bg-soft:     #f6f8fa;   /* GitHub 라이트 소프트 배경 */
+  --vp-c-bg-mute:     #f0f2f5;
+  --vp-c-bg-elv:      #ffffff;
+  --vp-c-bg-alt:      #f6f8fa;
+
+  --vp-c-text-1:      #1a1f2e;   /* 주 텍스트: 진한 청회색 */
+  --vp-c-text-2:      #4a5568;
+  --vp-c-text-3:      #718096;
+
+  --vp-c-border:      #e2e8f0;
+  --vp-c-divider:     #edf2f7;
+  --vp-c-gutter:      #f6f8fa;
+}
+
+/* ─────────────────────────────────────────────
+   다크 모드 배경 / 텍스트
+───────────────────────────────────────────── */
+.dark {
+  --vp-c-bg:          #0d1117;
+  --vp-c-bg-soft:     #161b22;
+  --vp-c-bg-mute:     #1c2128;
+  --vp-c-bg-elv:      #161b22;
+  --vp-c-bg-alt:      #161b22;
+
+  --vp-c-text-1:      #e6edf3;
+  --vp-c-text-2:      #8b949e;
+  --vp-c-text-3:      #656d76;
+
+  --vp-c-border:      #30363d;
+  --vp-c-divider:     #21262d;
+  --vp-c-gutter:      #161b22;
+}
+
+/* ─────────────────────────────────────────────
+   Hero 섹션 — 보라색 그라데이션 제거
+───────────────────────────────────────────── */
+:root {
+  --vp-home-hero-name-color: var(--vp-c-text-1);
+  --vp-home-hero-name-background: none;
+  --vp-home-hero-image-background-image: none;
+  --vp-home-hero-image-filter: none;
+}
+
+.dark {
+  --vp-home-hero-name-color: var(--vp-c-text-1);
+}
+
+/* Hero 제목 크기 제한 */
+.VPHero .name {
+  font-size: clamp(28px, 5vw, 44px) !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.VPHero .text {
+  font-size: clamp(18px, 3vw, 28px) !important;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+.VPHero .tagline {
+  font-size: 15px !important;
+  color: var(--vp-c-text-3);
+  line-height: 1.6;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─────────────────────────────────────────────
+   버튼 — Steel Blue 적용
+───────────────────────────────────────────── */
+.VPButton.brand {
+  background-color: hsl(215, 60%, 44%);
+  border-color: hsl(215, 60%, 44%);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.VPButton.brand:hover {
+  background-color: hsl(215, 60%, 38%);
+  border-color: hsl(215, 60%, 38%);
+}
+
+.dark .VPButton.brand {
+  background-color: hsl(215, 65%, 62%);
+  border-color: hsl(215, 65%, 62%);
+  color: #0d1117;
+}
+
+.dark .VPButton.brand:hover {
+  background-color: hsl(215, 65%, 55%);
+  border-color: hsl(215, 65%, 55%);
+}
+
+/* ─────────────────────────────────────────────
+   Features 카드 — 그림자 제거, 보더 기반
+───────────────────────────────────────────── */
+.VPFeature {
+  border: 1px solid var(--vp-c-border) !important;
+  background: var(--vp-c-bg-soft) !important;
+  box-shadow: none !important;
+  border-radius: 10px !important;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.VPFeature:hover {
+  border-color: hsl(215, 60%, 44%) !important;
+  background: var(--vp-c-bg-elv) !important;
+}
+
+.dark .VPFeature:hover {
+  border-color: hsl(215, 65%, 62%) !important;
+}
+
+.VPFeature .title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--vp-c-text-1);
+}
+
+.VPFeature .details {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+/* ─────────────────────────────────────────────
+   Navbar — 배경 정리
+───────────────────────────────────────────── */
+.VPNav {
+  border-bottom: 1px solid var(--vp-c-border);
+}
+
+:root {
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.92);
+}
+
+.dark {
+  --vp-nav-bg-color: rgba(13, 17, 23, 0.92);
+}
+
+/* ─────────────────────────────────────────────
+   사이드바
+───────────────────────────────────────────── */
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-border) !important;
+  background: var(--vp-c-bg-alt) !important;
+}
+
+/* 사이드바 활성 링크 */
+.VPSidebarItem.is-active > .item > .VPLink,
+.VPSidebarItem.is-active > .item > span {
+  color: hsl(215, 60%, 44%) !important;
+  font-weight: 500;
+}
+
+.dark .VPSidebarItem.is-active > .item > .VPLink,
+.dark .VPSidebarItem.is-active > .item > span {
+  color: hsl(215, 65%, 62%) !important;
+}
+
+/* ─────────────────────────────────────────────
+   본문 가독성
+───────────────────────────────────────────── */
+.vp-doc {
+  line-height: 1.75;
+}
+
+.vp-doc h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--vp-c-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.vp-doc h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 0.4rem;
+}
+
+.vp-doc h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* 본문 링크 */
+.vp-doc a {
+  color: hsl(215, 60%, 44%);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: hsl(215, 60%, 44%);
+}
+
+.dark .vp-doc a {
+  color: hsl(215, 65%, 62%);
+}
+
+.dark .vp-doc a:hover {
+  border-bottom-color: hsl(215, 65%, 62%);
+}
+
+/* ─────────────────────────────────────────────
+   코드 블록
+───────────────────────────────────────────── */
+:root {
+  --vp-code-block-bg: #f6f8fa;
+  --vp-code-color: #24292f;
+  --vp-code-block-color: #24292f;
+}
+
+.dark {
+  --vp-code-block-bg: #161b22;
+  --vp-code-color: #e6edf3;
+  --vp-code-block-color: #e6edf3;
+}
+
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 인라인 코드 */
+.vp-doc :not(pre) > code {
+  background: var(--vp-c-bg-mute);
+  color: hsl(215, 60%, 38%);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.875em;
+}
+
+.dark .vp-doc :not(pre) > code {
+  background: var(--vp-c-bg-soft);
+  color: hsl(215, 65%, 68%);
+}
+
+/* ─────────────────────────────────────────────
+   Mermaid 다이어그램
+───────────────────────────────────────────── */
+.mermaid {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* ─────────────────────────────────────────────
+   Custom Info / Warning 블록 색상
+───────────────────────────────────────────── */
+:root {
+  --vp-custom-block-tip-border: hsl(215, 50%, 70%);
+  --vp-custom-block-tip-text: hsl(215, 60%, 30%);
+  --vp-custom-block-tip-bg: hsl(215, 60%, 44% / 0.06);
+  --vp-custom-block-tip-code-bg: hsl(215, 60%, 44% / 0.1);
+}
+
+.dark {
+  --vp-custom-block-tip-border: hsl(215, 50%, 40%);
+  --vp-custom-block-tip-text: hsl(215, 65%, 72%);
+  --vp-custom-block-tip-bg: hsl(215, 65%, 62% / 0.1);
+  --vp-custom-block-tip-code-bg: hsl(215, 65%, 62% / 0.15);
+}
+
+/* ─────────────────────────────────────────────
+   푸터
+───────────────────────────────────────────── */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-border);
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+/* ─────────────────────────────────────────────
+   스크롤바 (WebKit)
+───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
+/* ─────────────────────────────────────────────
+   홈 페이지 레이아웃 여백 조정
+───────────────────────────────────────────── */
+.VPHome .VPHero {
+  padding: 80px 24px 60px;
+}
+
+.VPHome .VPFeatures {
+  padding: 0 24px 60px;
+}
+
+/* Features 그리드 — 카드 높이 자연스럽게 */
+.VPFeatures .items {
+  align-items: start !important;
+}
+
+/* ─────────────────────────────────────────────
+   접근성: focus-visible
+───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid hsl(215, 60%, 44%);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.dark :focus-visible {
+  outline-color: hsl(215, 65%, 62%);
+}
+
+/* ─────────────────────────────────────────────
+   모션 감소 대응
+───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
