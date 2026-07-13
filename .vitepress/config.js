@@ -4,7 +4,7 @@ export default defineConfig({
   title: "GoVail DevLog",
   description: "AI 에이전트와 LLM을 더 안전하게 쓰기 위한 정책 게이트웨이 개발 일지",
   base: "/",
-  
+
   // HTML <head> 내에 SEO 및 Open Graph 메타태그 주입
   head: [
     ['link', { rel: 'icon', href: 'https://github.com/GoVail.png' }],
@@ -13,86 +13,18 @@ export default defineConfig({
     ['meta', { property: 'og:description', content: 'AI 에이전트 기밀 유출 방지를 위한 작은 정책 게이트웨이 구축 기록' }],
     ['meta', { property: 'og:image', content: 'https://github.com/GoVail.png' }],
     ['meta', { property: 'og:url', content: 'https://govail.github.io' }],
-    
-    // Mermaid 다이어그램 동적 렌더링을 위해 v9 글로벌 라이브러리를 head에 로드
+
+    // Mermaid v9 CDN 로드
     ['script', { src: 'https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js' }],
-    
-    // 라우트 전환이 잦은 SPA성 환경이므로 DOM 변경을 감시하여 mermaid 다이어그램을 동적으로 그리는 헬퍼 스크립트 주입
-    ['script', {}, `
-      function renderMermaid() {
-        if (typeof mermaid !== 'undefined') {
-          const blocks = document.querySelectorAll('div.language-mermaid pre code');
-          if (blocks.length > 0) {
-            try {
-              mermaid.initialize({ theme: 'dark', startOnLoad: false });
-              const targetDivs = [];
-              blocks.forEach((block) => {
-                const container = block.closest('div.language-mermaid');
-                if (!container) return;
-                
-                // 이미 변환된 경우 중복 처리 방지
-                if (container.querySelector('div.mermaid')) return;
-                
-                const pre = block.parentElement;
-                if (pre) {
-                  pre.style.display = 'none'; // Vue 돔 유지 및 충돌 방지를 위해 숨김 처리만 수행
-                }
-                
-                const mermaidDiv = document.createElement('div');
-                mermaidDiv.className = 'mermaid';
-                mermaidDiv.style.whiteSpace = 'pre';
-                mermaidDiv.style.display = 'block';
-                mermaidDiv.style.justifyContent = 'center';
-                mermaidDiv.style.background = 'rgba(30, 41, 59, 0.4)';
-                mermaidDiv.style.border = '1px solid rgba(255,255,255,0.1)';
-                mermaidDiv.style.borderRadius = '8px';
-                mermaidDiv.style.padding = '1rem';
-                mermaidDiv.style.margin = '1rem 0';
-                
-                // Shiki의 span.line 구조에서 줄바꿈이 유실되지 않도록 개행 문자로 조인
-                const lines = Array.from(block.querySelectorAll('.line')).map(el => el.textContent);
-                mermaidDiv.textContent = lines.length > 0 ? lines.join('\\n') : block.textContent.trim();
-                
-                container.appendChild(mermaidDiv);
-                targetDivs.push(mermaidDiv);
-              });
-              
-              if (targetDivs.length > 0) {
-                mermaid.init(undefined, targetDivs);
-              }
-            } catch (e) {
-              console.error('[Mermaid Render Error]', e);
-            }
-          }
-        }
-      }
-      
-      // 최초 로드 시 실행
-      window.addEventListener('DOMContentLoaded', () => {
-        renderMermaid();
-        
-        // VitePress 페이지 전환 감지를 위한 MutationObserver 설정
-        const observer = new MutationObserver((mutations) => {
-          renderMermaid();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-        
-        // CDN 스크립트가 늦게 로드되는 경우를 대비한 폴링
-        const checkInterval = setInterval(() => {
-          if (typeof mermaid !== 'undefined') {
-            renderMermaid();
-            clearInterval(checkInterval);
-          }
-        }, 100);
-        setTimeout(() => clearInterval(checkInterval), 5000);
-      });
-    `]
+
+    // Mermaid 렌더러는 별도 파일로 분리하여 esbuild 빌드 오류 방지
+    ['script', { src: '/mermaid-renderer.js', defer: '' }]
   ],
 
   themeConfig: {
     logo: 'https://github.com/GoVail.png',
-    
-    // 깃허브 오그 링크를 상단 우측에 노출
+
+    // 깃허브 링크를 상단 우측에 노출
     socialLinks: [
       { icon: 'github', link: 'https://github.com/GoVail' }
     ],
@@ -106,13 +38,16 @@ export default defineConfig({
         items: [
           { text: 'GoVail Gateway (Rust)', link: 'https://github.com/GoVail/govail-gateway' },
           { text: 'GoVail Scanner (Python)', link: 'https://github.com/GoVail/govail-scanner' },
+          { text: 'GoVail Router (Python)', link: 'https://github.com/GoVail/govail-router' },
+          { text: 'GoVail Memory (Python)', link: 'https://github.com/GoVail/govail-memory' },
+          { text: 'GoVail Runtime (Python)', link: 'https://github.com/GoVail/govail-runtime' },
           { text: 'GoVail Contracts', link: 'https://github.com/GoVail/govail-contracts' },
           { text: 'GoVail Examples (데모)', link: 'https://github.com/GoVail/govail-examples' }
         ]
       }
     ],
 
-    // 좌측 사이드바 설정 (아티클 카테고리 구성)
+    // 좌측 사이드바 설정
     sidebar: [
       {
         text: 'Development Essays',
@@ -127,6 +62,14 @@ export default defineConfig({
           { text: '3. Gateway vs Runtime 분리 철학', link: '/posts/gateway-vs-runtime' },
           { text: '4. 소스 분석을 정책 힌트로 연동하기', link: '/posts/scanner-to-policy' },
           { text: '5. JSON Schema 기반 감사 로그 설계', link: '/posts/audit-event-design' }
+        ]
+      },
+      {
+        text: 'Component Deep-Dive',
+        items: [
+          { text: '6. Router — 스마트 요청 분기와 SSE', link: '/posts/router-design' },
+          { text: '7. Memory — Project RAG 아키텍처', link: '/posts/memory-rag' },
+          { text: '8. Runtime — 비동기 파이프라인과 Runner SDK', link: '/posts/runtime-pipeline' }
         ]
       }
     ],
