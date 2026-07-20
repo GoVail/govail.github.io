@@ -3,24 +3,26 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 
 export default withMermaid(
   defineConfig({
-    title: "GoVail DevLog",
-    description: "AI 에이전트와 LLM을 더 안전하게 쓰기 위한 정책 게이트웨이 개발 일지",
+    title: "GoVail — AI Governance Gateway",
+    description: "Enterprise AI를 안전하게. DLP 정책 · 인텔리전트 라우팅 · 실시간 감사 로그를 갖춘 오픈소스 AI 거버넌스 플랫폼.",
     base: "/",
+
+    // 보안: 에이전트 지침 및 README가 빌드에 포함되지 않도록 제외
+    srcExclude: ['**/AGENTS.md', '**/GEMINI.md', '**/CLAUDE.md', '**/README.md'],
 
     // 라이트 모드를 기본값으로 설정
     appearance: 'light',
 
     head: [
-      ['link', { rel: 'icon', href: 'https://github.com/GoVail.png' }],
+      ['link', { rel: 'icon', href: 'https://avatars.githubusercontent.com/u/291538321?s=32&v=4' }],
       // Inter 폰트 로드
       ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
       ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
       ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' }],
       // SEO / Open Graph
       ['meta', { property: 'og:type', content: 'website' }],
-      ['meta', { property: 'og:title', content: 'GoVail DevLog — AI Security Gateway' }],
-      ['meta', { property: 'og:description', content: 'AI 에이전트 기밀 유출 방지를 위한 정책 게이트웨이 구축 기록' }],
-      ['meta', { property: 'og:image', content: 'https://github.com/GoVail.png' }],
+      ['meta', { property: 'og:title', content: 'GoVail — AI Governance Gateway' }],
+      ['meta', { property: 'og:description', content: 'Enterprise AI를 안전하게. DLP 정책 · 인텔리전트 라우팅 · 실시간 감사 로그를 갖춘 오픈소스 AI 거버넌스 플랫폼.' }],
       ['meta', { property: 'og:url', content: 'https://govail.github.io' }],
     ],
 
@@ -33,7 +35,7 @@ export default withMermaid(
     },
 
     themeConfig: {
-      logo: 'https://github.com/GoVail.png',
+      logo: 'https://avatars.githubusercontent.com/u/291538321?s=64&v=4',
       siteTitle: 'GoVail',
 
       socialLinks: [
