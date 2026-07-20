@@ -56,6 +56,9 @@ export default withMermaid(
             { text: '6. Router 설계', link: '/posts/router-design' },
             { text: '7. Memory RAG', link: '/posts/memory-rag' },
             { text: '8. Runtime 파이프라인', link: '/posts/runtime-pipeline' },
+            { text: '9. 마이크로서비스 운영기', link: '/posts/operational-lessons' },
+            { text: '10. Temporal 워크플로우', link: '/posts/temporal-workflows' },
+            { text: '11. 관측 스택', link: '/posts/observability-stack' },
           ]
         },
         {
@@ -93,6 +96,14 @@ export default withMermaid(
             { text: '6. Router — 스마트 요청 분기와 SSE', link: '/posts/router-design' },
             { text: '7. Memory — Project RAG 아키텍처', link: '/posts/memory-rag' },
             { text: '8. Runtime — 비동기 파이프라인과 Runner SDK', link: '/posts/runtime-pipeline' }
+          ]
+        },
+        {
+          text: 'Operations & Infrastructure',
+          items: [
+            { text: '9. 마이크로서비스 운영기', link: '/posts/operational-lessons' },
+            { text: '10. Temporal 워크플로우 설계', link: '/posts/temporal-workflows' },
+            { text: '11. Prometheus+Grafana 관측 스택', link: '/posts/observability-stack' },
           ]
         }
       ],
